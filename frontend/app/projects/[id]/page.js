@@ -55,9 +55,11 @@ export default function ProjectDetailsPage({ params }) {
   async function handleJoinProject() {
     try {
       const data = await api(`/projects/${projectId}/join`, { method: "POST" });
-      if (data?.project) {
-        setProject(data.project);
-        loadTasks();
+      
+      await loadProject(); 
+      await loadTasks();
+      
+      if (typeof connect === "function") {
         connect(projectId);
       }
     } catch (error) {
