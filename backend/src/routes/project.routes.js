@@ -6,7 +6,6 @@ import Task from "../models/Task.js";
 import { protect } from "../middleware/auth.js";
 import { canAccessProject, isSameId } from "../utils/permissions.js";
 import { buildProjectSearchQuery } from "../utils/search.js";
-import { notifyProjectUpdate } from "../websocket/wsServer.js";
 
 const router = express.Router();
 
@@ -158,8 +157,6 @@ router.post("/:id/join", protect, async (req, res) => {
     const updatedProject = await Project.findById(project._id)
       .populate("owner", "name email avatarUrl")
       .populate("members", "name email avatarUrl");
-
-    notifyProjectUpdate(project._id, "project_members_updated", { project: updatedProject });
 
     res.json({ project: updatedProject });
   } catch (error) {

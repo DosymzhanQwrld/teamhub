@@ -15,7 +15,7 @@ function send(ws, payload) {
 
 function broadcastToProject(projectId, payload) {
   for (const [, client] of clients) {
-    if (String(client.projectId) === String(projectId)) {
+    if (client.projectId === projectId) {
       send(client.ws, payload);
     }
   }
@@ -23,22 +23,17 @@ function broadcastToProject(projectId, payload) {
 
 function getOnlineUsers(projectId) {
   const users = [];
+
   for (const [, client] of clients) {
-    if (String(client.projectId) === String(projectId)) {
+    if (client.projectId === projectId) {
       users.push(client.user);
     }
   }
+
   const map = new Map();
   users.forEach((user) => map.set(String(user.id), user));
-  return [...map.values()];
-}
 
-export function notifyProjectUpdate(projectId, type, extraData = {}) {
-  broadcastToProject(projectId, {
-    type,
-    projectId,
-    ...extraData
-  });
+  return [...map.values()];
 }
 
 export function setupWebSocket(server) {
@@ -122,6 +117,7 @@ export function setupWebSocket(server) {
 
       ws.on("close", () => {
         clients.delete(clientId);
+
         broadcastToProject(projectId, {
           type: "online-users",
           users: getOnlineUsers(projectId)
