@@ -1,5 +1,5 @@
 import { generateReactHelpers } from "@uploadthing/react";
 
 export const { useUploadThing, uploadFiles } = generateReactHelpers({
-  url: "http://localhost:5000/api/uploadthing"
-}); 
+  url: "https://teamhub-4tc5.onrender.com/api/uploadthing"
+});

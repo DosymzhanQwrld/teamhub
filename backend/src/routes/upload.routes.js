@@ -5,12 +5,9 @@ const f = createUploadthing();
 const uploadRouter = {
   avatarUploader: f({ image: { maxFileSize: "2MB", maxFileCount: 1 } })
     .middleware(() => {
-      // Проверяем в консоли бэкенда, доходит ли запрос сюда и видны ли ключи
-      console.log("Uploadthing middleware triggered. Secret Key exists:", !!process.env.UPLOADTHING_SECRET);
       return {};
     })
     .onUploadComplete(({ file }) => {
-      console.log("Avatar upload complete! URL:", file.url);
       return { url: file.url, key: file.key, name: file.name, type: file.type };
     }),
 
@@ -22,7 +19,6 @@ const uploadRouter = {
       return {};
     })
     .onUploadComplete(({ file }) => {
-      console.log("Attachment upload complete! URL:", file.url);
       return { url: file.url, key: file.key, name: file.name, type: file.type };
     })
 };
@@ -30,7 +26,6 @@ const uploadRouter = {
 export default createRouteHandler({ 
   router: uploadRouter,
   config: {
-    callbackUrl: "http://localhost:5000/api/uploadthing",
-    isDev: true
+    callbackUrl: "https://teamhub-4tc5.onrender.com/api/uploadthing"
   }
 });
