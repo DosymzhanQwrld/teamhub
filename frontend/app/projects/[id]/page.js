@@ -125,6 +125,10 @@ export default function ProjectDetailsPage({ params }) {
       try {
         const data = JSON.parse(event.data);
 
+        if (data.type === "project_members_updated") {
+          setProject(data.project);
+        }
+
         if (data.type === "task_created") {
           setTasks((prev) => [data.task, ...prev]);
         }
