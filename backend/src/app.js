@@ -1,6 +1,5 @@
 import path from "path";
 import dotenv from "dotenv";
-// Находим .env относительно текущего файла app.js
 dotenv.config({ path: path.resolve(process.cwd(), ".env") }); 
 
 import express from "express";
@@ -16,14 +15,24 @@ import fileInfoRouter from "./routes/file-info.routes.js";
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.CLIENT_URL
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(null, true);
+      }
+    },
     credentials: true
   })
 );
 
-// Монтируем роут uploadthing строго до JSON парсеров
 app.use("/api/uploadthing", uploadRoutes);
 
 app.use(express.json({ limit: "5mb" }));
