@@ -100,23 +100,26 @@ export default function ProjectDetailsPage({ params }) {
   }, [projectId]);
 
   const projectOwnerId = project?.owner?._id || project?.owner;
-  const isOwner = String(projectOwnerId) === String(user?._id);
+  const isOwner = user?._id && projectOwnerId && String(projectOwnerId) === String(user._id);
   const isMember = project?.members?.some(m => String(m._id || m) === String(user?._id));
 
-  useEffect(() => {
-    if (project && isMember) {
-      loadTasks();
-    }
-  }, [project, isMember]);
+  // Главное условие доступа: ты либо создатель (isOwner), либо уже состоишь в команде (isMember)
+  const hasAccess = isOwner || isMember;
 
   useEffect(() => {
-    if (project && isMember) {
+    if (project && hasAccess) {
+      loadTasks();
+    }
+  }, [project, hasAccess]);
+
+  useEffect(() => {
+    if (project && hasAccess) {
       connect(projectId);
       return () => {
         disconnect();
       };
     }
-  }, [project, isMember]);
+  }, [project, hasAccess]);
 
   useEffect(() => {
     if (!socket) return;
@@ -124,6 +127,10 @@ export default function ProjectDetailsPage({ params }) {
     const handleSocketMessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+
+        if (data.type === "project_members_updated") {
+          setProject(data.project);
+        }
 
         if (data.type === "task_created") {
           setTasks((prev) => [data.task, ...prev]);
@@ -189,7 +196,7 @@ export default function ProjectDetailsPage({ params }) {
             {(previewCover || project.coverUrl) && (
               <img src={previewCover || project.coverUrl} alt={project.title} style={{ width: "200px", height: "100px", objectFit: "cover", borderRadius: "6px" }} />
             )}
-            {isMember && isOwner && (
+            {hasAccess && isOwner && (
               <UploadButton endpoint="attachmentUploader" onUploaded={saveCover} onLocalSelect={(url) => setPreviewCover(url)}>
                 Change Cover
               </UploadButton>
@@ -217,7 +224,7 @@ export default function ProjectDetailsPage({ params }) {
           </div>
         </section>
 
-        {!isMember ? (
+        {!hasAccess ? (
           <div style={{ textAlign: "center", padding: "40px", border: "1px dashed #cbd5e1", borderRadius: "8px", marginTop: "20px" }}>
             <h2>You are not a member of this project yet</h2>
             <p style={{ color: "#64748b", marginBottom: "20px" }}>Join the project to view the chat, see team members, and look through assigned tasks.</p>
