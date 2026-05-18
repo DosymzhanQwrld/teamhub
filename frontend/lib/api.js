@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://teamhub-4tc5.onrender.com";
 
 export function getToken() {
   if (typeof window === "undefined") return null;

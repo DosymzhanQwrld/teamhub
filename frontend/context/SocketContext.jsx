@@ -16,7 +16,7 @@ export function SocketProvider({ children }) {
     if (!token || socketRef.current) return;
 
     const ws = new WebSocket(
-      `${process.env.NEXT_PUBLIC_WS_URL}?token=${token}&projectId=${projectId}`
+      `wss://teamhub-4tc5.onrender.com?token=${token}&projectId=${projectId}`
     );
 
     ws.onmessage = (event) => {
