@@ -103,7 +103,6 @@ export default function ProjectDetailsPage({ params }) {
   const isOwner = user?._id && projectOwnerId && String(projectOwnerId) === String(user._id);
   const isMember = project?.members?.some(m => String(m._id || m) === String(user?._id));
 
-  // Главное условие доступа: ты либо создатель (isOwner), либо уже состоишь в команде (isMember)
   const hasAccess = isOwner || isMember;
 
   useEffect(() => {
