@@ -1,0 +1,86 @@
+.navbar {
+  height: 68px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(16px, calc((100vw - 1120px) / 2));
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 22px;
+  color: #2563eb;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.navbar nav a {
+  font-weight: 600;
+}
+
+.navbar nav button {
+  padding: 8px 12px;
+}
+
+.hero {
+  min-height: calc(100vh - 68px);
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 8vw, 88px);
+  margin: 0;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #526179;
+  max-width: 620px;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.actions a {
+  background: #2563eb;
+  color: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+.actions a:last-child {
+  background: white;
+  color: #2563eb;
+  border: 1px solid #dbe4ff;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

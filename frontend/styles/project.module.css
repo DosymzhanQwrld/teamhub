@@ -1,0 +1,155 @@
+.form {
+  display: grid;
+  gap: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 18px;
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 180px 160px auto;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.header img {
+  width: 240px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.taskCard {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.taskCard div {
+  display: flex;
+  gap: 8px;
+}
+
+.taskCard span {
+  background: #eef2ff;
+  color: #3730a3;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.onlineBox,
+.chat {
+  margin-top: 24px;
+  background: white;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+}
+
+.onlineList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.onlineUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.onlineUser img,
+.onlineUser span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.onlineUser img {
+  object-fit: cover;
+}
+
+.onlineUser span {
+  background: #2563eb;
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.messages {
+  display: grid;
+  gap: 10px;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.message {
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.message p {
+  margin: 6px 0 0;
+}
+
+.chatForm {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .grid,
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .chatForm {
+    flex-direction: column;
+  }
+}

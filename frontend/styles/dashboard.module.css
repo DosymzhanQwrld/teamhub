@@ -1,0 +1,55 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.projectCard {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+.projectCard img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.projectCard h2 {
+  margin: 0;
+}
+
+.projectCard p {
+  color: #526179;
+}
+
+.projectCard span {
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 999px;
+  padding: 6px 10px;
+  width: fit-content;
+}
+
+.projectCard a {
+  font-weight: 700;
+  color: #2563eb;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
