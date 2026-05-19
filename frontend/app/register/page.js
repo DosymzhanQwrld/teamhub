@@ -15,6 +15,11 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
+    if (form.password.length < 6) { 
+    setError("Пароль должен содержать минимум 6 символов!"); 
+    return; 
+  }
+
     try {
       await register(form.name, form.email, form.password);
       router.push("/dashboard");
