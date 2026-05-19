@@ -34,10 +34,8 @@ export default function ProfilePage() {
   }
 
   async function saveAvatar(res) {
-    // Логируем ответ, чтобы увидеть структуру в консоли браузера (F12)
     console.log("Uploadthing response:", res);
 
-    // Uploadthing возвращает массив файлов. Берем первый элемент.
     const file = Array.isArray(res) ? res[0] : res;
     
     if (!file || !file.url) {
